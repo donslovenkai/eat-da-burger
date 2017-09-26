@@ -20,7 +20,7 @@ function objToSql(ob){
 // Create ORM object to perform SQL database queries
   var orm = {
   // Function to return all table entries
-  all: function(tableInput, cb){
+  selectAll: function(tableInput, cb){
     var queryString = 'SELECT * FROM ' + tableInput;
 
     connection.query(queryString, function(err, result){
@@ -29,7 +29,7 @@ function objToSql(ob){
     });
   },
   // Function to create a table entry
-  create: function(table, col, vals, cb){
+  insertOne: function(table, col, vals, cb){
     var queryString = 'INSERT INTO ' + table;
     queryString = queryString + ' (';
     queryString = queryString + col.toString(); 
@@ -45,7 +45,7 @@ function objToSql(ob){
   },
 
   //Function to update a table entry
-  update: function(table, objColVals, condition, cb){
+  updateOne: function(table, objColVals, condition, cb){
     var queryString = 'UPDATE ' + table;
       queryString = queryString + ' SET ';
       queryString = queryString + objToSql(objColVals);

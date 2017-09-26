@@ -14,7 +14,7 @@ router.get('/', function(req, res){
 
 // GET route to /burgers
 router.get('/burgers', function(req, res){
-	burgers.all(function(data){
+	burgers.selectAll(function(data){
 		var hbsObject = {burgers: data};
 
 		console.log(hbsObject);
@@ -25,7 +25,7 @@ router.get('/burgers', function(req, res){
 
 // POST route to create new burger entry
 router.post('/burgers/create', function(req, res){
-	burgers.create(['burger_name'], [req.body.b_name], function(data){
+	burgers.insertOne(['burger_name'], [req.body.b_name], function(data){
 		//redirect to /burgers upon completion
 		res.redirect('/burgers')
 	});
@@ -38,7 +38,7 @@ router.put('/burgers/update/:id', function(req, res){
 	console.log('condition ', condition);
 
     //Redirect to /burgers upon completion
-	burgers.update({'devoured': req.body.devoured}, condition, function(data){
+	burgers.updateOne({'devoured': req.body.devoured}, condition, function(data){
 		res.redirect('/burgers');
 	});
 });

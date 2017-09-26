@@ -4,21 +4,21 @@ var orm = require('../config/orm.js');
 //Create the burgers object
 var burgers = {
 	//Select all burgers table entries
-	all: function(cb){
-		orm.all('burgers', function(res){
+	selectAll: function(cb){
+		orm.selectAll('burgers', function(res){
 			cb(res);
 		});
 	},
-	//Create new entry in burgers table
-	create: function(col, vals, cb){
-		orm.create('burgers', col, vals, function(res){
+	//Insert a new entry in burgers table
+	insertOne: function(col, vals, cb){
+		orm.insertOne('burgers', col, vals, function(res){
 			cb(res);
 		});
 	},
-	//Update entry in burgers table
+	//Update an entry in burgers table
 	//objColVals is an object specifying columns as object keys with associated values
-	update: function(objColVals, condition, cb){
-		orm.update('burgers', objColVals, condition, function(res){
+	updateOne: function(objColVals, condition, cb){
+		orm.updateOne('burgers', objColVals, condition, function(res){
 			cb(res);
 		});
 	}
