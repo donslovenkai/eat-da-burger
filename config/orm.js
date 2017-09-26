@@ -1,24 +1,25 @@
+// Import mysql connection object
 var connection = require('../config/connection.js');
 
+// Functions to generate SQL syntax
 function printQuestionMarks(num){
   var arr = [];
-
   for (var i=0; i<num; i++){
     arr.push('?')
   };
-
   return arr.toString();
 };
 
 function objToSql(ob){
-  //column1=value, column2=value2,...
+  //column1=value, column2=value2, etc.
   var arr = [];
-
   for (var key in ob) {
     arr.push(key + '=' + ob[key]);
   };
 
+// Create ORM object to perform SQL database queries
   var orm = {
+  // Function to return all table entries
   all: function(tableInput, cb){
     var queryString = 'SELECT * FROM ' + tableInput;
 
@@ -27,6 +28,7 @@ function objToSql(ob){
       cb(result);
     });
   },
+  // Function to create a table entry
   create: function(table, col, vals, cb){
     var queryString = 'INSERT INTO ' + table;
     queryString = queryString + ' (';
@@ -41,6 +43,8 @@ function objToSql(ob){
       cb(result);
     });
   },
+
+  //Function to update a table entry
   update: function(table, objColVals, condition, cb){
     var queryString = 'UPDATE ' + table;
       queryString = queryString + ' SET ';
@@ -50,6 +54,7 @@ function objToSql(ob){
 
     console.log(queryString);
 
+    // Perform the database query
     connection.query(queryString, function(err, result){
       if(err) throw err;
       cb(result);

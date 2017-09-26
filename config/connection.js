@@ -1,14 +1,12 @@
+// Sets up the code to connect Node to MySQL 
 var mysql = require('mysql');
-var connection;
 
-if(process.env.JAWSDB_URL) {
-    connection = mysql.createConnection(process.env.JAWSDB_URL);
-} else{
-    connection = mysql.createConnection({
-        root: 3000,
+//Create MySQL connection object
+var connection = mysql.createConnection({
+        port: 3000,
         host: 'localhost',
         user: 'root',
-        password: '',
+        password: 'Bootcamp!2#',
         database: 'burgers_db',
     });
 };
@@ -21,4 +19,5 @@ connection.connect(function(err) {
     console.log('connected as id ' + connection.threadId);
 });
 
+// Export the connection
 module.exports = connection;
